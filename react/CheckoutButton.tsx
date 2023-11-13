@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { Button } from 'vtex.styleguide'
 import { CssHandlesTypes, useCssHandles } from 'vtex.css-handles'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import useCheckout from './modules/checkoutHook'
 
@@ -20,11 +21,16 @@ const CheckoutButton: StoreFunctionComponent<Props> = ({
   const { url: checkoutUrl } = useCheckoutURL()
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const goToCheckout = useCheckout()
+  const { orderForm } = useOrderForm()
+
+  const isMinimumValue = orderForm.value > 30000
+  
 
   return (
     <div className={`${handles.minicartCheckoutButton} mv3 ph4 ph6-l`}>
       <Button
         id="proceed-to-checkout"
+        disabled={!isMinimumValue}
         onClick={() => goToCheckout(finishShoppingButtonLink || checkoutUrl)}
         variation="primary"
         block
