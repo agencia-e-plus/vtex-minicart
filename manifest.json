@@ -2,7 +2,7 @@
   "vendor": "gruposoares",
   "name": "minicart",
   "title": "Mini Cart",
-  "version": "2.75.8",
+  "version": "2.75.9",
   "builders": {
     "messages": "1.x",
     "store": "0.x",
